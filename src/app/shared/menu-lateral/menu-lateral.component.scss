@@ -1,0 +1,58 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.div-contenido {
+  padding: 20px;
+}
+
+.card-perfil {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 10px;
+  height: 150px;
+  
+  span {
+    color: white;
+    position: relative;
+    top: 90px;
+    left: 32px;
+    font-size: 25px;
+    //font-weight: bold;
+  } 
+  p {
+    color: white;
+    position: relative;
+    top: 94px;
+    text-align:center;
+    font-size: 15px;
+    font-weight: lighter;
+  } 
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+}
+
+.container {
+  margin : 20px;
+}

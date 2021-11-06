@@ -1,0 +1,33 @@
+<div>
+    <mat-card>
+        <hr>
+        <img src='/assets/img/registros-medicos.png' mat-card-image class="logo1">
+        <mat-card-title>INICIAR SESIÓN</mat-card-title>
+        <mat-card-content>
+            <form>
+                <p>
+                    <mat-form-field>
+
+                        <input type="text" matInput placeholder="Usuario" [(ngModel)]="usuario.username" name="username"
+                            id="username" />
+
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+
+                        <input mat-matListIcon type="password" matInput placeholder="Contraseña"
+                            [(ngModel)]="usuario.contrasena" name="contrasena" id="contrasena" />
+
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <button type="submit" (click)='login()' mat-raised-button color="primary"
+                        class="boton">Ingresar</button>
+                </p>
+            </form>
+        </mat-card-content>
+
+    </mat-card>
+</div>

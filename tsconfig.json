@@ -16,6 +16,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    //Desactivar la verificacion de nulos e indefinidos en Angular 12
+    "strictNullChecks": false,
     "lib": [
       "es2018",
       "dom"
