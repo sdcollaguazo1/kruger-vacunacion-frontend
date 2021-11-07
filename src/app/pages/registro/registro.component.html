@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <form [formGroup]="empleadoForm">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-subtitle>
+                        Mis Datos
+                        <mat-divider> </mat-divider>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="div-contenedor">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Cédula</mat-label>
+                                    <input id="cedula" name="cedula" matInput formControlName="cedula"
+                                        placeholder="Ingrese la cédula del empleado" maxlength="10" required>
+                                    <mat-error *ngIf="empleadoForm.get('cedula').hasError('required')">La cédula del
+                                        empleado es requerido</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('cedula').hasError('minlength')">El tamaño de la
+                                        cédula del empleado es 10 caracteres</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('cedula').hasError('pattern')">Solo se puede
+                                        ingresar números en la cédula del empleado</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Nombre</mat-label>
+                                    <input id="nombre" name="nombre" matInput formControlName="nombre"
+                                        placeholder="Ingrese el nombre del empleado" maxlength="100" required>
+                                    <mat-error *ngIf="empleadoForm.get('nombre').hasError('required')">El nombre del
+                                        empleado es requerido</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('nombre').hasError('maxlength')">El tamaño máximo
+                                        del nombre del empleado es 100 caracteres</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('nombre').hasError('pattern')">Solo se puede
+                                        ingresar letras en el nombre del empleado</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Apellido</mat-label>
+                                    <input id="apellido" name="apellido" matInput formControlName="apellido"
+                                        placeholder="Ingrese el apellido del empleado" maxlength="100" required>
+                                    <mat-error *ngIf="empleadoForm.get('apellido').hasError('required')">El apellido del
+                                        empleado es requerido</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('apellido').hasError('maxlength')">El tamaño
+                                        máximo del apellido del empleado es 100 caracteres</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('apellido').hasError('pattern')">Solo se puede
+                                        ingresar letras en el apellido del empleado</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Email </mat-label>
+                                    <input type="email" name="email" id="email" matInput formControlName="email"
+                                        placeholder="Ingrese el email del empleado" maxlength="50" required>
+                                    <mat-error *ngIf="empleadoForm.get('email').hasError('required')">El email del
+                                        empleado
+                                        no puede estar vacio</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('email').hasError('maxlength')">El tamaño máximo
+                                        del
+                                        email del empleado debe ser 50 caracteres</mat-error>
+                                    <mat-error *ngIf="empleadoForm.get('email').hasError('email')">El email del empleado
+                                        tiene un formato incorrecto</mat-error>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Fecha de nacimiento </mat-label>
+                                    <input formControlName="fecha_nacimiento" name="fecha_nacimiento"
+                                        id="fecha_nacimiento" matInput [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Dirección del domicilio </mat-label>
+                                    <input type="text" name="direccion" id="direccion" matInput
+                                        formControlName="direccion"
+                                        placeholder="Ingrese la direccion del domiclio del empleado" maxlength="100">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Télefono movil </mat-label>
+                                    <input type="text" name="numero_telefono" id="numero_telefono" matInput
+                                        formControlName="numero_telefono"
+                                        placeholder="Ingrese el número télefonico del empleado" maxlength="10">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <br><br>
+                                <mat-checkbox formControlName="estado" name="estado" id="estado"
+                                    (change)="checkEstado($event.checked)" color="primary">¿Esta Vacunado?
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isChecked">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Seleccione el tipo de vacuna </mat-label>
+                                    <mat-select formControlName="vacuna" name="vacuna" id="vacuna" [compareWith]="compararVacuna">
+                                        <mat-option *ngFor="let vacuna of listVacunas" [value]="vacuna">
+                                            {{vacuna.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="empleadoForm.get('vacuna').hasError('required')">Seleccione el tipo de
+                                         vacuna</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isChecked">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Fecha de vacunación </mat-label>
+                                    <input formControlName="fecha_vacuna" name="fecha_vacuna" id="fecha_vacuna" matInput
+                                        [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error *ngIf="empleadoForm.get('num_dosis').hasError('required')">Seleccione la
+                                        fecha de vacunación</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isChecked">
+                                <mat-form-field class="example-full-width" appearance="standard">
+                                    <mat-label>Número de dosis </mat-label>
+                                    <input type="number" name="num_dosis" id="num_dosis" matInput
+                                        formControlName="num_dosis" placeholder="Ingrese el número dosis aplicada"
+                                        max="3" min="1">
+                                    <mat-error *ngIf="empleadoForm.get('num_dosis').hasError('required')">El número
+                                        dosis
+                                        no puede estar vacio</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="div-contenedor">
+
+                        <button mat-raised-button color="primary" role="submit" (click)='update()'
+                            [disabled]="empleadoForm.invalid">Editar</button>
+                    </div>
+                </mat-card-actions>
+
+            </mat-card>
+        </form>
+    </div>
+</div>

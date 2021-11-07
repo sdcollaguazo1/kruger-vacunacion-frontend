@@ -32,7 +32,6 @@ export class MenuLateralComponent {
   }
 
   getUrl() { 
-    console.log(this.authService.usuario);
     let urlFondo = '../assets/img/registro.jpg'
       return 'url('+urlFondo+')'
   }

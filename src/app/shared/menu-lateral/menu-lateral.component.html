@@ -12,23 +12,16 @@
       <mat-divider></mat-divider>
     </mat-nav-list>
 
-    <mat-nav-list>
-      <a matSubheader mat-list-item routerLink="/inicio">
+    <mat-nav-list *ngIf="authService.hasRole('ROLE_ADMIN')">
+      <a matSubheader mat-list-item routerLink="/empleados">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empleados
       </a>
       <mat-divider></mat-divider>
     </mat-nav-list>
 
-    <mat-nav-list>
-      <a matSubheader mat-list-item routerLink="/inicio">
+    <mat-nav-list *ngIf="authService.hasRole('ROLE_USER')">
+      <a matSubheader mat-list-item routerLink="/registro" >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mi Registro
-      </a>
-      <mat-divider></mat-divider>
-    </mat-nav-list>
-
-    <mat-nav-list>
-      <a matSubheader mat-list-item routerLink="/inicio">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consultas
       </a>
       <mat-divider></mat-divider>
     </mat-nav-list>

@@ -1,5 +1,8 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
+//Añadir Common module antes de browserModule para evitar inconvenientes
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +16,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 //Librerias de formularios
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 //Librerias de Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +26,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 
+//Librerias para fechas y date picker
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { Moment } from 'moment';
+
 //Librerias menu lateral
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -31,15 +39,28 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list'; 
 import { MatExpansionModule } from '@angular/material/expansion'; 
+import {MatSelectModule} from '@angular/material/select'; 
 
 //Librerias de Bootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+//Libreria para paginacion
+import {NgxPaginationModule} from 'ngx-pagination';
+
+//Librerias de lenguaje en español
+import {registerLocaleData} from '@angular/common';
+import localeES from '@angular/common/locales/es';
 
 //Componentes
 import { AutenticacionComponent } from './pages/autenticacion/autenticacion.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
+import { EmpleadosComponent } from './pages/empleados/empleados.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import { EmpleadoFormModalComponent } from './pages/empleados/empleado-form-modal/empleado-form-modal.component'
 
+registerLocaleData(localeES,'es')
 
 @NgModule({
   declarations: [
@@ -47,13 +68,18 @@ import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.compone
     AutenticacionComponent,
     InicioComponent,
     MenuLateralComponent,
+    EmpleadosComponent,
+    RegistroComponent,
+    EmpleadoFormModalComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
+    BrowserModule,  
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgbModule,
+    NgbModalModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -67,7 +93,11 @@ import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.compone
     MatListModule,
     MatDividerModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxPaginationModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

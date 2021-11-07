@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title">Crear empleado</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="empleadoForm" >
+
+    <div class="modal-body div-contenedor">
+
+        <p>
+            <mat-form-field class="example-full-width" appearance="standard">
+                <mat-label>Cédula</mat-label>
+                <input id="cedula" name="cedula" matInput formControlName="cedula"
+                    placeholder="Ingrese la cédula del empleado" maxlength="10" required>
+                <mat-error *ngIf="empleadoForm.get('cedula').hasError('required')">La cédula del empleado es requerido</mat-error>
+                <mat-error *ngIf="empleadoForm.get('cedula').hasError('minlength')">El tamaño de la cédula del empleado es 10 caracteres</mat-error>
+                <mat-error *ngIf="empleadoForm.get('cedula').hasError('pattern')">Solo se puede ingresar números en la cédula del empleado</mat-error>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="example-full-width" appearance="standard">
+                <mat-label>Nombre</mat-label>
+                <input id="nombre" name="nombre" matInput formControlName="nombre"
+                    placeholder="Ingrese el nombre del empleado"  maxlength="100" required>
+                <mat-error *ngIf="empleadoForm.get('nombre').hasError('required')">El nombre del empleado es requerido</mat-error>
+                <mat-error *ngIf="empleadoForm.get('nombre').hasError('maxlength')">El tamaño máximo del nombre del empleado es 100 caracteres</mat-error>
+                <mat-error *ngIf="empleadoForm.get('nombre').hasError('pattern')">Solo se puede ingresar letras en el nombre del empleado</mat-error>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="example-full-width" appearance="standard">
+                <mat-label>Apellido</mat-label>
+                <input id="apellido" name="apellido" matInput formControlName="apellido"
+                    placeholder="Ingrese el apellido del empleado" maxlength="100" required>
+                <mat-error *ngIf="empleadoForm.get('apellido').hasError('required')">El apellido del empleado es requerido</mat-error>
+                <mat-error *ngIf="empleadoForm.get('apellido').hasError('maxlength')">El tamaño máximo del apellido del empleado es 100 caracteres</mat-error>
+                <mat-error *ngIf="empleadoForm.get('apellido').hasError('pattern')">Solo se puede ingresar letras en el apellido del empleado</mat-error>
+            </mat-form-field>
+        </p>
+
+
+        <p>
+            <mat-form-field class="example-full-width" appearance="standard">
+                <mat-label>Email </mat-label>
+                <input type="email" name="email" id="email" matInput formControlName="email"
+                 placeholder="Ingrese el email del empleado" maxlength="50" required>
+                    <mat-error *ngIf="empleadoForm.get('email').hasError('required')">El email del empleado no puede estar vacio</mat-error>
+                    <mat-error *ngIf="empleadoForm.get('email').hasError('maxlength')">El tamaño máximo del email del empleado debe ser 50 caracteres</mat-error>
+                    <mat-error *ngIf="empleadoForm.get('email').hasError('email')">El email del empleado tiene un formato incorrecto</mat-error>
+            </mat-form-field>
+        </p>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" mat-raised-button color="primary" (click)='create()' [disabled]="empleadoForm.invalid" *ngIf="!empleado.id else elseBlock">Crear</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
+        <ng-template #elseBlock>
+            <button type="button" mat-raised-button color="primary" (click)='update()' [disabled]="empleadoForm.invalid">Actualizar</button>
+        </ng-template>
+    </div>
+</form>
