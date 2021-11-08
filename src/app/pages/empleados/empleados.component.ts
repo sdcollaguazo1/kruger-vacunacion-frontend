@@ -4,6 +4,7 @@ import { Empleado } from 'src/app/entities/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { EmpleadoFormModalComponent } from './empleado-form-modal/empleado-form-modal.component';
 import swal from 'sweetalert2';
+import { EmpleadosConsultaModalComponent } from './empleados-consulta-modal/empleados-consulta-modal.component';
 
 @Component({
   selector: 'app-empleados',
@@ -23,11 +24,38 @@ export class EmpleadosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getListEmpleados();
+    this.getListEmpleados()
   }
 
   getListEmpleados() {
     this.empleadoService.getListEmpleados(this.pageNumber).subscribe(
+      response => {
+        this.listEmpleado = response.content as Empleado[];
+        this.totalItems = response.totalElements as number;
+      }
+    );
+  }
+
+  getListEmpleadosEstado(estado: boolean) {
+    this.empleadoService.getListEmpleadosEstado(this.pageNumber, estado).subscribe(
+      response => {
+        this.listEmpleado = response.content as Empleado[];
+        this.totalItems = response.totalElements as number;
+      }
+    );
+  }
+
+  getListEmpleadosVacuna(vacunaId: number) {
+    this.empleadoService.getListEmpleadosVacuna(this.pageNumber, vacunaId).subscribe(
+      response => {
+        this.listEmpleado = response.content as Empleado[];
+        this.totalItems = response.totalElements as number;
+      }
+    );
+  }
+
+  getListEmpleadosFechaVacunacion(fechaInicio: Date, fechaFin: Date) {
+    this.empleadoService.getListEmpleadosFechaVacunacion(this.pageNumber, fechaInicio, fechaFin).subscribe(
       response => {
         this.listEmpleado = response.content as Empleado[];
         this.totalItems = response.totalElements as number;
@@ -43,6 +71,28 @@ export class EmpleadosComponent implements OnInit {
     modalRef.componentInstance.empleado = empleado;
     modalRef.result.then((result: any) => {
       this.getListEmpleados();
+    }).catch((res: any) => { });
+  }
+
+  abrirConsultaModal() {
+    const modalRef = this.modalService.open(EmpleadosConsultaModalComponent, { centered: true });
+    modalRef.result.then((result: any) => {
+      if (result != 'Close click') {
+        switch (result.id) {
+          case 1: {
+            this.getListEmpleadosEstado(result.estado);
+            break;
+          }
+          case 2: {
+            this.getListEmpleadosVacuna(result.vacuna);
+            break;
+          }
+          case 3: {
+            this.getListEmpleadosFechaVacunacion(result.fechaInicio,result.fechaFin);
+            break;
+          }
+        }
+      }
     }).catch((res: any) => { });
   }
 

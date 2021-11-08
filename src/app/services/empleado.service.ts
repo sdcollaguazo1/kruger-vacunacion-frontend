@@ -34,6 +34,73 @@ export class EmpleadoService {
     );
   }
 
+  getListEmpleadosEstado(pageNumber: number,estado:boolean): Observable<any> {
+    let params = new HttpParams()
+
+    if(estado != null){
+      params = params.set('estado',estado.toString())
+    }
+
+    params = params.set('page', pageNumber.toString())
+    params = params.set('limit', '10')
+
+    return this.http.get(`${this.urlEndPoint}/estado`, { params }).pipe(
+      map(
+        (response: any) => response
+      ),
+      catchError(
+        e => {
+          return throwError(e);
+        }
+      ),
+    );
+  }
+
+  getListEmpleadosVacuna(pageNumber: number,vacunaId:number): Observable<any> {
+    let params = new HttpParams()
+
+    if(vacunaId){
+      params = params.set('vacunaId',vacunaId.toString())
+    }
+
+    params = params.set('page', pageNumber.toString())
+    params = params.set('limit', '10')
+
+    return this.http.get(`${this.urlEndPoint}/vacuna`, { params }).pipe(
+      map(
+        (response: any) => response
+      ),
+      catchError(
+        e => {
+          return throwError(e);
+        }
+      ),
+    );
+  }
+
+  getListEmpleadosFechaVacunacion(pageNumber: number,fechaInicio:Date, fechaFin:Date): Observable<any> {
+    let params = new HttpParams()
+
+    if(fechaInicio && fechaFin){
+      params = params.set('fechaInicio',fechaInicio.toISOString())
+      params = params.set('fechaFin',fechaFin.toISOString())
+    }
+
+    params = params.set('page', pageNumber.toString())
+    params = params.set('limit', '10')
+
+    return this.http.get(`${this.urlEndPoint}/fecha`, { params }).pipe(
+      map(
+        (response: any) => response
+      ),
+      catchError(
+        e => {
+          return throwError(e);
+        }
+      ),
+    );
+  }
+
   create(empleado: Empleado): Observable<Empleado> {
     return this.http.post<Empleado>(this.urlEndPoint, empleado).pipe(
       map((response: any) => response.usuario as Empleado),

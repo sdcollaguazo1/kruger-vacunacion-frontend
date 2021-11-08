@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h4 class="modal-title">Filtros</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+
+<div class="modal-body div-contenedor">
+
+    <p>Seleccione la consulta a realizar:</p>
+
+    <mat-form-field class="example-full-width" >
+        <mat-label>Consulta</mat-label>
+        <mat-select [(ngModel)]="consulta" name="consulta" (selectionChange)="selectConsulta($event.value)"  required>
+            <mat-option *ngFor="let consulta of consultas" [value]="consulta">
+                {{consulta.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="consulta?.id == 1">
+        <mat-form-field class="example-full-width" >
+            <mat-label>Estado de vacunación</mat-label>
+            <mat-select [(ngModel)]="estado" name="estado" required>
+                <mat-option *ngFor="let estado of estados" [value]="estado">
+                    {{estado.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="consulta?.id == 2">
+        <mat-form-field class="example-full-width">
+            <mat-label>Seleccione el tipo de vacuna </mat-label>
+            <mat-select  [(ngModel)]="vacuna" name="vacuna" id="vacuna" required>
+                <mat-option *ngFor="let vacuna of listVacunas" [value]="vacuna">
+                    {{vacuna.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="consulta?.id == 3">
+        <mat-form-field class="example-full-width">
+            <mat-label>Ingrese el rango de fechas</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Fecha inicio">
+                <input matEndDate formControlName="end" placeholder="Fecha fin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" mat-raised-button color="primary" (click)='consultar()' *ngIf="this.consulta != null">Consultar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

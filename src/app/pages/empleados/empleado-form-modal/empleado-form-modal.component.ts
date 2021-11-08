@@ -14,7 +14,8 @@ export class EmpleadoFormModalComponent implements OnInit {
 
   @Input() empleado: Empleado = new Empleado();
   empleadoForm: FormGroup;
-  
+  titulo:string = ''
+
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
@@ -24,6 +25,11 @@ export class EmpleadoFormModalComponent implements OnInit {
   
   ngOnInit(): void {
     this.validators();
+    if(this.empleado.id){
+      this.titulo = 'Actualizar Empleado'
+    }else{
+      this.titulo = 'Crear Empleado'
+    }
   }
 
   validators() {
@@ -33,6 +39,13 @@ export class EmpleadoFormModalComponent implements OnInit {
       apellido: new FormControl(this.empleado.apellido, [Validators.required, Validators.maxLength(100),Validators.pattern('[A-Za-z ]+')]),
       email: new FormControl(this.empleado.email, [Validators.required, Validators.email, Validators.maxLength(100)]),
       id: new FormControl(this.empleado.id),
+      fecha_nacimiento: new FormControl(this.empleado.fecha_nacimiento),
+      direccion: new FormControl(this.empleado.direccion),
+      numero_telefono: new FormControl(this.empleado.numero_telefono),
+      estado: new FormControl(this.empleado.estado),
+      vacuna: new FormControl(this.empleado.vacuna),
+      fecha_vacuna: new FormControl(this.empleado.fecha_vacuna),
+      num_dosis: new FormControl(this.empleado.num_dosis)
     })
   }
 

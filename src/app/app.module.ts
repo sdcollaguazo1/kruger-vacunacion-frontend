@@ -40,6 +40,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list'; 
 import { MatExpansionModule } from '@angular/material/expansion'; 
 import {MatSelectModule} from '@angular/material/select'; 
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 //Librerias de Bootstrap
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -52,13 +53,19 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
 
+
+//Google charts
+import { GoogleChartsModule } from 'angular-google-charts';
+
 //Componentes
 import { AutenticacionComponent } from './pages/autenticacion/autenticacion.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
 import { EmpleadosComponent } from './pages/empleados/empleados.component';
 import { RegistroComponent } from './pages/registro/registro.component';
-import { EmpleadoFormModalComponent } from './pages/empleados/empleado-form-modal/empleado-form-modal.component'
+import { EmpleadoFormModalComponent } from './pages/empleados/empleado-form-modal/empleado-form-modal.component';
+import { EmpleadosConsultaModalComponent } from './pages/empleados/empleados-consulta-modal/empleados-consulta-modal.component'
+
 
 registerLocaleData(localeES,'es')
 
@@ -70,7 +77,8 @@ registerLocaleData(localeES,'es')
     MenuLateralComponent,
     EmpleadosComponent,
     RegistroComponent,
-    EmpleadoFormModalComponent
+    EmpleadoFormModalComponent,
+    EmpleadosConsultaModalComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +106,10 @@ registerLocaleData(localeES,'es')
     MatDatepickerModule,
     MatMomentDateModule,
     MatSelectModule,
+    MatTooltipModule,
+    GoogleChartsModule,
   ],
+  
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
